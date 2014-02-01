@@ -1,0 +1,63 @@
+<head>
+  <title>Lending Library</title>
+</head>
+
+<body>
+
+<div id="lendlib">
+    <div style="float: right; margin-right:20px;">
+        {{loginButtons align="right"}}
+    </div>
+
+    <div id="categories-container">
+        {{> categories}}
+    </div>
+    <div id="list">
+        {{> list}}
+    </div>
+</div>
+</body>
+
+<template name="categories">
+    <h2 class="title">my stuff</h2>
+    <div id="categories" class="btn-group">
+        {{#if new_cat}}
+        <div class="category1">
+            <input type="text" id="add-category" value="" />
+        </div>
+        {{else}}
+        <div class="category2 btn btn-success" id="btnNewCat">&plus;</div>
+        {{/if}}
+
+        {{#each lists}}
+        <div class="category btn {{list_status}}" id="{{_id}}">
+            {{Category}}
+        </div>
+        {{/each}}
+    </div>
+</template>
+
+<template name="list">
+    <ul id="lending_list">
+        {{#each items}}
+        <li class="lending_item alert alert-info">
+            <button type="button" class="close delete_item" id="{{Name}}">×</button>
+            {{Name}}
+            {{#if lendee_editing}}
+            <input type="text" id="edit_lendee" class="span2 pull-right" value=""/>
+            {{else}}
+            <div class="lendee pull-right label {{LendClass}}">
+                {{Lendee}}
+            </div>
+            {{/if}}
+        </li>
+        {{/each}}
+        {{#if list_selected}}
+        <li class="alert-success" id="btnAddItem">&plus;
+            {{#if list_adding}}
+            <input class="span4" id="item_to_add" size="32" type="text">
+            {{/if}}
+        </li>
+        {{/if}}
+    </ul>
+</template>
